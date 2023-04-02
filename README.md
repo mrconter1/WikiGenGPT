@@ -6,7 +6,7 @@
 
 WikiGenGPT is a project that uses the power of GPT-4 to create immersive and fictional Wikipedia articles, allowing users to explore a captivating, fictional Wikipedia universe.
 
-![image](https://user-images.githubusercontent.com/32551374/229346424-bcc83445-3d87-42d1-8e30-3aea07b32832.png)
+![image](https://user-images.githubusercontent.com/32551374/229347125-88d74f6f-4ee1-4bb8-9e52-a0adbfd68310.png)
 
 *Please note that the generation of new articles may be a bit slow but it is manageable.*
 
