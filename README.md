@@ -33,7 +33,7 @@ This simple code utilizes the GPT-4 API to generate fictional Wikipedia articles
 
 1. Clone the repository:
    ```
-   git clone https://github.com/mrconter1/WikiGenGPT.git
+   git clone https://github.com/mrconter1/WikiGenGPT
    ```
 2. Install the required dependencies:
    ```
