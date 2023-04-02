@@ -4,7 +4,11 @@
 ![Issues](https://img.shields.io/github/issues/mrconter1/WikiGenGPT)
 ![Stars](https://img.shields.io/github/stars/mrconter1/WikiGenGPT)
 
-WikiGenGPT is a project that uses the power of GPT-4 API to create immersive and fictional Wikipedia articles, allowing users to explore a captivating, fictional Wikipedia universe.
+WikiGenGPT is a project that uses the power of GPT-4 to create immersive and fictional Wikipedia articles, allowing users to explore a captivating, fictional Wikipedia universe.
+
+![image](https://user-images.githubusercontent.com/32551374/229346424-bcc83445-3d87-42d1-8e30-3aea07b32832.png)
+
+*Please note that the generation of new articles may be a bit slow but it is manageable.*
 
 ## Table of Contents
 
@@ -35,7 +39,7 @@ This simple code utilizes the GPT-4 API to generate fictional Wikipedia articles
    ```
    pip3 install openai
    ```
-3. Open the `main.py` file and insert your GPT-4 API key:
+3. Open the `wikigengpt.py` file and insert your GPT-4 API key:
    ```
    openai.api_key = "YOUR_API_KEY"
    ```
