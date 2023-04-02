@@ -175,7 +175,6 @@ def generate_articles_for_links(links):
         page = generate_page(link)
         relative_url = extract_title_and_convert_to_snake_case(page)
         save_article(relative_url, page)
-        print(page + " has been created!")
 
 class MyRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
