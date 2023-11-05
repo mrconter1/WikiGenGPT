@@ -224,3 +224,9 @@ first_page = generate_new_page()
 relative_url = extract_title_and_convert_to_snake_case(first_page)
 save_article(relative_url, first_page)
 print("http://localhost:8080/" + relative_url)
+
+# Start the server
+port = 8080
+httpd = socketserver.TCPServer(("", port), Handler)
+print("Serving on port", port)
+httpd.serve_forever()
