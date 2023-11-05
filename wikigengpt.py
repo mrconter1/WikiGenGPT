@@ -2,6 +2,7 @@ import http.server
 import socketserver
 import urllib.parse
 import threading
+import argparse
 
 import subprocess
 import openai
@@ -91,7 +92,27 @@ template_page = """<!DOCTYPE html>
 
 """
 
-start_html = template_page + """Could you please use the HTML template above to do the following? Write an EXTREMELY interesting and intriguing made-up Wikipedia article about something. It should have a Wikipedia-like name for the article. It could be about engineering, people, events, or whatever. It should sound real but should actually be real. Also make sure to add Wikipedia links throughout the article text just like a real Wikipedia article would have. The article should not mention that it is fictional but rather look totally real (even though it's not). Also,  make sure that the links only link to other non-real things. It cannot for instance link to "car" because that actually exists. There should be at least ten links. Make sure to never use the word "fantasy" or "fiction". Make sure that all the links are snake_case! The links should also be relative. All the html-files will be located in the same folder! Don't use ":" or "-" in the title. The title should be Wikipedia-like. The links should not end in ".html"! Avoid colon in the titles! Never use ":" in the title of an article!!! Never use use a "#" in the hyperlinks!!!"""
+
+
+
+# Create the parser
+parser = argparse.ArgumentParser(description='Process some variables.')
+
+# Add the user_concept argument
+parser.add_argument('user_concept', type=str, help='A user concept for the HTML page')
+
+# Parse the arguments
+args = parser.parse_args()
+
+# Now you can use args.user_concept in your script
+user_concept = args.user_concept
+
+# Only set custom_html if user_concept is provided
+if user_concept is not None:
+    custom_html = template_page + """Could you please use the HTML template above to do the following? Write an EXTREMELY interesting and intriguing made-up Wikipedia article about {user_concept}. It should have a Wikipedia-like name for the article. It could be about engineering, people, events, or whatever. It should sound real but should actually be real. Also make sure to add Wikipedia links throughout the article text just like a real Wikipedia article would have. The article should not mention that it is fictional but rather look totally real (even though it's not). Also,  make sure that the links only link to other non-real things. It cannot for instance link to "car" because that actually exists. There should be at least ten links. Make sure to never use the word "fantasy" or "fiction". Make sure that all the links are snake_case! The links should also be relative. All the html-files will be located in the same folder! Don't use ":" or "-" in the title. The title should be Wikipedia-like. The links should not end in ".html"! Avoid colon in the titles! Never use ":" in the title of an article!!! Never use use a "#" in the hyperlinks!!!""".format(user_concept=user_concept)
+    start_html = custom_html
+else:
+    start_html = template_page + """Could you please use the HTML template above to do the following? Write an EXTREMELY interesting and intriguing made-up Wikipedia article about something. It should have a Wikipedia-like name for the article. It could be about engineering, people, events, or whatever. It should sound real but should actually be real. Also make sure to add Wikipedia links throughout the article text just like a real Wikipedia article would have. The article should not mention that it is fictional but rather look totally real (even though it's not). Also,  make sure that the links only link to other non-real things. It cannot for instance link to "car" because that actually exists. There should be at least ten links. Make sure to never use the word "fantasy" or "fiction". Make sure that all the links are snake_case! The links should also be relative. All the html-files will be located in the same folder! Don't use ":" or "-" in the title. The title should be Wikipedia-like. The links should not end in ".html"! Avoid colon in the titles! Never use ":" in the title of an article!!! Never use use a "#" in the hyperlinks!!!"""
 
 new_html = template_page + """Given the context of XXXXXXXXXX this other article write a NEW EXTREMELY interesting and intriguing made-up Wikipedia article about it. It should sound real but should actually be real. Also make sure to add Wikipedia links throughout the article text just like a real Wikipedia article would have. The article should not mention that it is fictional but rather look totally real (even though it's not). Also,  make sure that the links only link to other non-real things. It cannot for instance link to "car" because that actually exists. There should be at least ten links. Make sure to never use the word "fantasy" or "fiction". Make sure that all the links are snake_case! The links should also be relative. All the html-files will be located in the same folder! Don't use ":" or "-" in the title. The title should be Wikipedia-like. The links should not end in ".html"! Avoid colon in the titles! Never use ":" in the title of an article!!! Never use use a "#" in the hyperlinks!!!"""
 
@@ -203,9 +224,3 @@ first_page = generate_new_page()
 relative_url = extract_title_and_convert_to_snake_case(first_page)
 save_article(relative_url, first_page)
 print("http://localhost:8080/" + relative_url)
-
-# Start the server
-port = 8080
-httpd = socketserver.TCPServer(("", port), Handler)
-print("Serving on port", port)
-httpd.serve_forever()
